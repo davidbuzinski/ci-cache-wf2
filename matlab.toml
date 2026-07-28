@@ -1,0 +1,10 @@
+name = "workflow-1"
+
+[folders]
+path = [
+    "toolbox",
+]
+test = [
+    "tests",
+]
+

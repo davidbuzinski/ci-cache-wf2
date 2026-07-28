@@ -1,0 +1,18 @@
+include:
+- component: $CI_SERVER_FQDN/mathworks/components/matlab/build@~latest
+  inputs:
+    build_options: -outputCache
+
+build:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      variables:
+        POLICY: pull-push
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+      variables:
+        POLICY: pull
+  cache:
+    key: matlab-buildtool-cache
+    policy: $POLICY
+    paths:
+      - .buildtool/

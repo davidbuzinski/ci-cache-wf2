@@ -1,0 +1,26 @@
+name: Build with cache
+on: [push]
+
+jobs:
+  build:
+    name: MATLAB Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: matlab-actions/setup-matlab@v3
+        with:
+          release: latest-including-prerelease
+
+      - uses: actions/cache/restore@v6
+        with:
+          path: .buildtool
+          key: matlab-buildtool-${{ runner.os }}-${{ github.ref_name }}
+          restore-keys: |
+            buildtool-${{ runner.os }}-
+
+      - uses: matlab-actions/run-build@v3
+
+      - if: github.ref == 'refs/heads/main'
+        uses: actions/cache/save@v5
+        with:
+          path: .buildtool
+          key: matlab-buildtool-${{ runner.os }}-${{ github.ref_name }}
