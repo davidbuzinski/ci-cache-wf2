@@ -9,6 +9,7 @@ jobs:
       - uses: matlab-actions/setup-matlab@v3
         with:
           release: latest-including-prerelease
+          cache: true
 
       - uses: actions/cache/restore@v6
         with:
