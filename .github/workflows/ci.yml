@@ -6,6 +6,8 @@ jobs:
     name: MATLAB Build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v7
+
       - uses: matlab-actions/setup-matlab@v3
         with:
           release: latest-including-prerelease
